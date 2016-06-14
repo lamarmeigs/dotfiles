@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+alias unittest='RUN_MODE=unittest python -m unittest' 
+alias unittest_coverage='RUN_MODE=unittest coverage run -m unittest discover'
+export VAGRANT_EMAIL="lmeigs@shiftgig.com"
+export VAGRANT_REFRESH_DATABASES=1
