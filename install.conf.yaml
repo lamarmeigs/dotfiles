@@ -1,0 +1,8 @@
+- clean: ['~']
+
+- link:
+    ~/.bash_profile: bash_profile
+    ~/.bash_it_rc: bash_it_rc
+    ~/.gitconfig: gitconfig
+    ~/.shiftgig_rc: shiftgig_rc
+    ~/.vimrc: vimrc
