@@ -4,6 +4,7 @@
     ~/.bash_profile: bash_profile
     ~/.bash_it: bash-it
     ~/.bash_it_rc: bash_it_rc
+    ~/.bash_it/themes/mini: bash-it-themes/mini
     ~/.gitconfig: gitconfig
     ~/.shiftgig_rc: shiftgig_rc
     ~/.vim: vim
