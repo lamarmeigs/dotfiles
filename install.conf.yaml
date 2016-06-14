@@ -5,10 +5,11 @@
     - [brew install python, Installing/updating python via brew...]
     - [pip install virtualenvwrapper, Installing virtualenvwrapper...]
     - [pip install trash-cli, Installing trash-cli...]
-    - [git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && ~/.bash_it/install.sh, Installing Bash-it...]
+    - [BASH_IT=~/.bash_it ./bash_it_install.sh, Configuring Bash-It...]
 
 - link:
     ~/.bash_profile: bash_profile
+    ~/.bash_it: bash-it
     ~/.bash_it_rc: bash_it_rc
     ~/.gitconfig: gitconfig
     ~/.shiftgig_rc: shiftgig_rc
