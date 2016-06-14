@@ -1,12 +1,5 @@
 - clean: ['~']
 
-- shell:
-    - [/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)", Installing brew...]
-    - [brew install python, Installing/updating python via brew...]
-    - [pip install virtualenvwrapper, Installing virtualenvwrapper...]
-    - [pip install trash-cli, Installing trash-cli...]
-    - [BASH_IT=~/.bash_it ./bash_it_install.sh, Configuring Bash-It...]
-
 - link:
     ~/.bash_profile: bash_profile
     ~/.bash_it: bash-it
@@ -15,3 +8,6 @@
     ~/.shiftgig_rc: shiftgig_rc
     ~/.vim: vim
     ~/.vimrc: vimrc
+
+- shell:
+    - [BASH_IT=~/.bash_it ./bash_it_install.sh, Configuring Bash-It...]
