@@ -1,3 +1,19 @@
+" Load pathogen
+runtime bundle/vim-pathogen/autoload/pathogen.vim
+execute pathogen#infect()
+execute pathogen#helptags()
+
+" Configure syntastic linters
+let g:syntastic_python_checkers = ['flake8', 'mypy', 'pep257', 'py3kwarn', 'python']
+let g:syntastic_check_on_open = 1
+let g:syntastic_always_populate_loc_list = 1
+
+" Configure vim-markdown
+let g:vim_markdown_folding_disabled=1
+let g:vim_markdown_no_default_key_mappings=1
+
+" Custom
+" needs review; may be obsolete and non-functional
 syntax on
 syntax on
 set expandtab
@@ -32,13 +48,3 @@ autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
-
-execute pathogen#infect()
-execute pathogen#helptags()
-
-let g:syntastic_python_checkers = ['flake8', 'mypy', 'pep257', 'py3kwarn', 'python']
-let g:syntastic_check_on_open = 1
-let g:syntastic_always_populate_loc_list = 1
-
-let g:vim_markdown_folding_disabled=1
-let g:vim_markdown_no_default_key_mappings=1

@@ -6,16 +6,11 @@
     - [pip install virtualenvwrapper, Installing virtualenvwrapper...]
     - [pip install trash-cli, Installing trash-cli...]
     - [git clone https://github.com/Bash-it/bash-it.git ~/.bash_it && ~/.bash_it/install.sh, Installing Bash-it...]
-    - [mkdir -p ~/.vim/autoload ~/.vim/bundle, Configure .vim subdirectory...]
-    - [curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim, Installing pathogen.vim...]
-    - [git clone https://github.com/scrooloose/syntastic.git ~/.vim/bundle/syntastic.git, Installing syntastic.git...]
-    - [git clone git://github.com/tpope/vim-fugitive.git ~/.vim/bundle/vim-fugitive.git, Installing vim-fugitive...]
-    - [vim -u NONE -c "helptags vim-fugitive/doc" -c q, Adding vim-fugitive helptags...]
-    - [git clone https://github.com/plasticboy/vim-markdown.git ~/.vim/bundle/vim-markdown.git, Installing vim-markdown...]
 
 - link:
     ~/.bash_profile: bash_profile
     ~/.bash_it_rc: bash_it_rc
     ~/.gitconfig: gitconfig
     ~/.shiftgig_rc: shiftgig_rc
+    ~/.vim: vim
     ~/.vimrc: vimrc
