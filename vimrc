@@ -43,8 +43,6 @@ set colorcolumn=80,120
 " When opening a file, return the cursor to its last known position
 au BufWinEnter * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-" Filetype-specific configurations
+" Activate filetype-specific plugins
 filetype plugin on
-autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4 textwidth=119
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
+filetype plugin indent on
