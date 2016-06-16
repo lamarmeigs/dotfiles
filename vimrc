@@ -14,36 +14,48 @@ let g:vim_markdown_no_default_key_mappings=1
 " Custom
 " needs review; may be obsolete and non-functional
 syntax on
-syntax on
+
+" configure indentation and tabs to be 4 spaces
 set expandtab
-set textwidth=119
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 set autoindent
+
+" wrap text at 120 columns
+set textwidth=119
+
+" case-insensitive, highlighted search
 set ignorecase
-set viminfo='20,<1000
-set ruler
 set hlsearch
+hi Search	cterm=NONE ctermfg=black ctermbg=LightBlue
+
+" ???
+set viminfo='20,<1000
+
+" Display line info
+set ruler
+
+" Press F2 to switch between paste and nopaste
 set pastetoggle=<F2>
 
+" Add colored columns to guide coding standards (python only)
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
 set colorcolumn=80,120
 
+" When opening a file, return the cursor to its last known position
 function! ResCur()
-    if line("'\"") <= line("$")
+    if line ("'\"") > 1 && line("'\"") <= line("$")
         normal! g`"
-        return 1
     endif
 endfunction
-
 augroup resCur
     autocmd!
     autocmd BufWinEnter * call ResCur()
 augroup END
-hi Search	cterm=NONE ctermfg=black ctermbg=yellow
 
+" Filetype-specific configurations
+filetype plugin on
 autocmd FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType javascript setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType handlebars setlocal shiftwidth=2 tabstop=2 softtabstop=2
 autocmd FileType html setlocal shiftwidth=2 tabstop=2 softtabstop=2
