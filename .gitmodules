@@ -7,9 +7,6 @@
 [submodule "vim/bundle/vim-markdown.git"]
 	path = vim/bundle/vim-markdown.git
 	url = https://github.com/plasticboy/vim-markdown.git
-[submodule "vim/bundle/vim-pathogen.git"]
-	path = vim/bundle/vim-pathogen.git
-	url = https://github.com/tpope/vim-pathogen.git
 [submodule "bash-it"]
 	path = bash-it
 	url = https://github.com/Bash-it/bash-it.git
