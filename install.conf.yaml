@@ -1,14 +1,27 @@
 - clean: ['~']
 
+
+# Setup bash-it first, since it wants to backup bash_profile
 - link:
-    ~/.bash_profile: bash_profile
     ~/.bash_it: bash-it
     ~/.bash_it_rc: bash_it_rc
+
+- shell:
+    - [~/.bash_it/install.sh, Installing bash-it...]
+    - [bash-it enable completion bash-it brew django git pip vagrant, Enabling bash-it completions...]
+    - [bash-it enable alias fuck general vim, Enabling bash-it aliases...]
+    - [bash-it enable plugin alias-completion, Enabling bash-it plugins...]
+    - [rm ~/.bash_profile, Removing bash-it generated .bash_profile...]
+
+- link:
     ~/.bash_it/themes/mini: bash-it-themes/mini
+
+
+# Setup everything else
+- link:
+    ~/.bash_profile: bash_profile
     ~/.gitconfig: gitconfig
     ~/.shiftgig_rc: shiftgig_rc
     ~/.vim: vim
     ~/.vimrc: vimrc
 
-- shell:
-    - [BASH_IT=~/.bash_it ./bash_it_install.sh, Configuring Bash-It...]
