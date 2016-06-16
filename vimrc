@@ -3,7 +3,7 @@ execute pathogen#infect()
 execute pathogen#helptags()
 
 " Configure syntastic linters
-let g:syntastic_python_checkers = ['flake8', 'mypy', 'pep257', 'py3kwarn', 'python']
+let g:syntastic_python_checkers = ['flake8', 'pydocstyle', 'py3kwarn', 'python']
 let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
 
@@ -11,8 +11,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_no_default_key_mappings=1
 
-" Custom
-" needs review; may be obsolete and non-functional
+" Enable syntax highlighting
 syntax on
 
 " Default tabs & indentation is 4 spaces
