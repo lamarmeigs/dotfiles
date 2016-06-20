@@ -22,3 +22,6 @@ alias clean_pyc='\rm $(find . -name "*.pyc")'
 # for pip install errors on osx
 export CFLAGS=-Qunused-arguments
 export CPPFLAGS=-Qunused-arguments
+
+# Local additions or overrides
+source ~/.extra_rc 2> /dev/null
