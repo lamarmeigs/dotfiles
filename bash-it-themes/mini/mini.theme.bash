@@ -7,7 +7,7 @@ function prompt_command() {
     fi
 
     if [ -d .git ]; then
-        local branch="$(git rev-parse --abbrev-ref HEAD)"
+        local branch="$(git symbolic-ref --short HEAD)"
         PS1="${venv}${cyan}\W${green} (${branch})${normal}\$ "
     else
         PS1="${venv}${cyan}\W${normal}\$ "
