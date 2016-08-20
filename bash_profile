@@ -12,12 +12,13 @@ source ~/.shiftgig_rc
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
 export PATH=$PATH:/usr/local/bin:/usr/local/sbin
-alias rm="trash-put $1"
 
 # custom aliases
 alias ...="cd ../.."
 alias please='sudo $(history -p \!\!)'
 alias clean_pyc='\rm $(find . -name "*.pyc")'
+alias unalias='type'
+alias rm="trash-put $1"
 
 # for pip install errors on osx
 export CFLAGS=-Qunused-arguments
