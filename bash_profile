@@ -19,6 +19,7 @@ alias please='sudo $(history -p \!\!)'
 alias clean_pyc='\rm $(find . -name "*.pyc")'
 alias unalias='type'
 alias rm="trash-put $1"
+alias findfile="find . -name $1"
 
 # for pip install errors on osx
 export CFLAGS=-Qunused-arguments
