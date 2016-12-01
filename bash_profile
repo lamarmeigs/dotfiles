@@ -20,6 +20,7 @@ alias clean_pyc='\rm $(find . -name "*.pyc")'
 alias unalias='type'
 alias rm="trash-put $1"
 alias findfile="find . -name $1"
+alias rmswp='\rm $(findfile ".*.swp")'
 
 # for pip install errors on osx
 export CFLAGS=-Qunused-arguments
