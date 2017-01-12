@@ -18,8 +18,8 @@ alias ...="cd ../.."
 alias please='sudo $(history -p \!\!)'
 alias clean_pyc='\rm $(find . -name "*.pyc")'
 alias unalias='type'
-alias rm="trash-put $1"
-alias findfile="find . -name $1"
+alias rm="trash-put"
+alias findfile="find . -name"
 alias rmswp='\rm $(findfile ".*.swp")'
 
 # for pip install errors on osx
