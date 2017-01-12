@@ -22,6 +22,12 @@ alias rm="trash-put"
 alias findfile="find . -name"
 alias rmswp='\rm $(findfile ".*.swp")'
 
+# custom functions
+make_python_dir() {
+    mkdir $1 && touch $1/__init__.py
+}
+alias mkpydir=make_python_dir
+
 # for pip install errors on osx
 export CFLAGS=-Qunused-arguments
 export CPPFLAGS=-Qunused-arguments
