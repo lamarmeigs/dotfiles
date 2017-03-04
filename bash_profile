@@ -23,14 +23,17 @@ alias rmswp='\rm $(findfile ".*.swp")'
 
 # custom functions
 make_python_dir() {
-    mkdir -p $1
-    current_directory=''
-    while IFS='/' read -ra NEWPATH; do
-        for index in ${!NEWPATH[@]}; do
-            current_directory=$current_directory${NEWPATH[$index]}/
-            touch "$current_directory"__init__.py
-        done
-    done <<< "$1"
+    for dir in "$@"
+    do
+        mkdir -p $dir
+        current_directory=''
+        while IFS='/' read -ra NEWPATH; do
+            for index in ${!NEWPATH[@]}; do
+                current_directory=$current_directory${NEWPATH[$index]}/
+                touch "$current_directory"__init__.py
+            done
+        done <<< "$dir"
+    done
 }
 alias mkpydir=make_python_dir
 
