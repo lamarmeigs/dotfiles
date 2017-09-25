@@ -1,11 +1,19 @@
 #!/usr/bin/env bash
 
-## Load virtualenvwrapper
+# Load virtualenvwrapper
 source /usr/local/bin/virtualenvwrapper.sh
 
-## Context-specific commands
+# Context-specific commands
 source ~/.bash_it_rc
 source ~/.shiftgig_rc
+
+# Configure bash history
+# - make it really big
+# - if the current line matches previous lines, remove them
+# - ignore lines prefixed with an empty space (useful with sensitive data)
+unset HISTFILESIZE
+export HISTFILESIZE=999999999
+export HISTCONTROL=ignoreboth:erasedups
 
 # custom aliases
 alias ...="cd ../.."
