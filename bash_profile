@@ -13,3 +13,7 @@ export PATH=$PATH:/usr/local/bin:/usr/local/sbin:$HOME/bin
 # Modify shell colors
 export CLICOLOR=1
 export LSCOLORS=ExFxCxDxBxegedabagacad
+
+# Set npm global installation directory
+[ -d ~/.npm-packages ] && export NPM_PACKAGES=~/.npm-packages
+[ -d $NPM_PACKAGES/bin ] && export PATH=$PATH:$NPM_PACKAGES/bin

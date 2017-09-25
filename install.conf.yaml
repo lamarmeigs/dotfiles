@@ -22,6 +22,7 @@
     ~/.bashrc: bashrc
     ~/.bash_profile: bash_profile
     ~/.gitconfig: gitconfig
+    ~/.npmrc: npmrc
     ~/.shiftgig_rc: shiftgig_rc
     ~/.vim: vim
     ~/.vimrc: vimrc
