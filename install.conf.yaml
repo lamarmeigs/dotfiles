@@ -19,9 +19,9 @@
 
 # Setup everything else
 - link:
+    ~/.bashrc: bashrc
     ~/.bash_profile: bash_profile
     ~/.gitconfig: gitconfig
     ~/.shiftgig_rc: shiftgig_rc
     ~/.vim: vim
     ~/.vimrc: vimrc
-
