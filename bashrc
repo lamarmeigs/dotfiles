@@ -3,6 +3,9 @@
 # Load virtualenvwrapper
 source /usr/local/bin/virtualenvwrapper.sh
 
+# Load pyenv, if necessary
+if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+
 # Context-specific commands
 source ~/.bash_it_rc
 source ~/.shiftgig_rc
@@ -45,3 +48,10 @@ export CPPFLAGS=-Qunused-arguments
 
 # Local additions or overrides
 source ~/.extra_rc 2> /dev/null
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /Users/lamarmeigs/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /Users/lamarmeigs/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /Users/lamarmeigs/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /Users/lamarmeigs/.npm-packages/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
