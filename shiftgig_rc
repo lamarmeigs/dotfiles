@@ -1,9 +1,50 @@
 #!/usr/bin/env bash
 
+export SG_PROJECTS_DIR="${HOME}/projects"
+
 alias unittest='RUN_MODE=unittest python -m unittest' 
 alias unittest_coverage='RUN_MODE=unittest coverage run -m unittest discover'
-export SG_PROJECTS_DIR="${HOME}/projects"
-export VAGRANT_HOSTNAME="vagrant-fullstack-centos7"
-export VAGRANT_EMAIL_ADDRESS="lmeigs+vagrant@shiftgig.com"
-export VAGRANT_REFRESH_DATABASES=0
-export VAGRANT_SKIP_ANSIBLE=1
+alias sls-deploy='npm run sls-deploy'
+alias sls-print='npm run sls-print'
+alias sls-remove='npm run sls-remove'
+
+
+gargoyle() {
+    # Usage:
+    # $> gargoyle ~/projects/bullpen vagrant@lamar.shiftgig.net
+    # $> gargoyle . lamar
+
+    if [[ $# -ne 2 ]]
+    then
+        echo "usage: watch project_path remote_host"
+        return
+    fi
+
+    remote_host=$2
+    if [[ $remote_host != *"@"* ]]
+    then
+        remote_host=vagrant@$remote_host
+    fi
+    if [[ $remote_host != *"shiftgig.net" ]]
+    then
+        remote_host=$remote_host.shiftgig.net
+    fi
+
+    local_abs_path="$(cd $1; pwd -P)"
+    if [[ ! -d $1 ]]; then
+        return
+    fi
+    IFS="/" read -ra path_components <<< "$local_abs_path"
+    project_name=${path_components[$((${#path_components[@]} - 1))]}
+    remote_project=$remote_host:/home/vagrant/$project_name
+    rsync_excludes="--exclude=.git --exclude=*.pyc --exclude=*__pycache__* --exclude=*.sw* --exclude=config/* --exclude=.idea/*"
+    dt_fmt="+%Y/%m/%d %H:%M:%S"
+
+    echo "[$(date "$dt_fmt")] Running initial sync..."
+    rsync -azq $rsync_excludes $local_abs_path/ $remote_project/ --delete &&
+        echo "[$(date "$dt_fmt")] Initial sync complete"
+
+    echo "[$(date "$dt_fmt")] Watching..."
+    fswatch -o -i "\\.py$" -i "\\.yaml$" -e ".*/config/.*" -e ".*" $local_abs_path |
+    xargs -n1 -I {} rsync -azP --out-format="[%t] %n%L" $rsync_excludes $local_abs_path/ $remote_project/ --delete
+}
