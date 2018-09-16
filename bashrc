@@ -42,6 +42,33 @@ make_python_dir() {
 }
 alias mkpydir=make_python_dir
 
+gourcerer() {
+    # Generate videos visualizing git commit history (requires gource & ffmpeg)
+    # Usage:
+    # $> gourcerer /path/to/repo [/path/to/repo]
+
+    # TODO: time piped vs independent
+    # TODO: pass custom settings per repo
+    #   repo_path resolution seconds-per-day frame-rate
+
+    mkdir -p ~/screensavers /tmp/gourcerer
+    for var in "$@"
+    do
+        pushd $var >/dev/null
+        repo_name=`basename $(pwd)`
+        git_source=`git remote get-url origin`
+        git clone $git_source /tmp/gourcerer/$repo_name
+        pushd /tmp/gourcerer/$repo_name >/dev/null
+        gource -1280x720 -s 1 --file-idle-time 0 --key --title $repo_name -o - | ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -bf 0 ~/screensavers/$repo_name.mp4
+        popd >/dev/null
+        rm -rf /tmp/gourcerer/$repo_name
+        popd >/dev/null
+    done
+    rm -rf /tmp/gourcerer
+}
+
+
+
 # for pip install errors on osx
 export CFLAGS=-Qunused-arguments
 export CPPFLAGS=-Qunused-arguments
