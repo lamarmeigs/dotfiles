@@ -59,7 +59,8 @@ gourcerer() {
         git_source=`git remote get-url origin`
         git clone $git_source /tmp/gourcerer/$repo_name
         pushd /tmp/gourcerer/$repo_name >/dev/null
-        gource -1280x720 -s 1 --file-idle-time 0 --key --title $repo_name -o - | ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i - -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -bf 0 ~/screensavers/$repo_name.mp4
+        gource -1280x720 -s 1 --file-idle-time 0 --key --title $repo_name -o $repo_name.ppeg
+        ffmpeg -y -r 60 -f image2pipe -vcodec ppm -i $repo_name.ppeg -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -bf 0 ~/screensavers/$repo_name.mp4
         popd >/dev/null
         rm -rf /tmp/gourcerer/$repo_name
         popd >/dev/null
