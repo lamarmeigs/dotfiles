@@ -53,18 +53,27 @@ gourcerer() {
     # ~/projects/test_repo 1280x720 1 60 bloom
 
     mkdir -p ~/screensavers /tmp/gourcerer
+    pids=()
     while IFS=$' ' read -r repo_path resolution secs_per_day frame_rate hidden; do
+
+        # Check out the latest version of the main branch
         pushd $repo_path >/dev/null
         repo_name=`basename $(git rev-parse --show-toplevel)`
         git_source=`git remote get-url origin`
         git clone $git_source /tmp/gourcerer/$repo_name
+
+        # Generate git history video as background process
         pushd /tmp/gourcerer/$repo_name >/dev/null
-        gource -$resolution -s $secs_per_day --file-idle-time 0 --key --title $repo_name --hide mouse,$hidden -r $frame_rate -o $repo_name.ppm &&
-            ffmpeg -y -r $frame_rate -f image2pipe -vcodec ppm -i $repo_name.ppm -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -bf 0 ~/screensavers/$repo_name.mp4
+        (gource -$resolution -s $secs_per_day --file-idle-time 0 --key --title $repo_name --hide mouse,$hidden -r $frame_rate -o $repo_name.ppm && ffmpeg -y -r $frame_rate -f image2pipe -vcodec ppm -i $repo_name.ppm -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -bf 0 ~/screensavers/$repo_name.mp4 && \rm $repo_name.ppm) &
+        pids+=($!)
         popd >/dev/null
-        \rm -rf /tmp/gourcerer/$repo_name
         popd >/dev/null
     done < $1
+
+    # Wait until all video processing is complete before cleaning up
+    for pid in ${pids[*]}; do
+        wait $pid
+    done
     \rm -rf /tmp/gourcerer
 }
 
