@@ -8,7 +8,7 @@
 source ~/.bashrc
 
 # Include a local bin directory in PATH
-export PATH=$PATH:/usr/local/bin:/usr/local/sbin:$HOME/bin
+export PATH=$PATH:/usr/local/bin:/usr/local/sbin:$HOME/.local/bin:$HOME/Library/Python/2.7/bin:$HOME/Library/Python/3.6/bin
 
 # Modify shell colors
 export CLICOLOR=1
