@@ -1,3 +1,5 @@
 [user]
-	name = lamarmeigs
-	email = lmeigs@shiftgig.com
+	name = Lamar
+	email = lamar@divvydose.com
+[core]
+	excludesfile = /Users/lamar/.gitignore_global
