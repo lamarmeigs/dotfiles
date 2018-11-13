@@ -14,3 +14,6 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
+[submodule "docker_helper"]
+	path = docker_helper
+	url = https://github.com/awproksel/docker_helper.git
