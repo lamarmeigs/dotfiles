@@ -24,5 +24,7 @@
     ~/.gitconfig: gitconfig
     ~/.npmrc: npmrc
     ~/.shiftgig_rc: shiftgig_rc
+    ~/.divvydose_rc: divvydose_rc
     ~/.vim: vim
     ~/.vimrc: vimrc
+    ~/.docker_helper: docker_helper

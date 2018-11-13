@@ -1,0 +1,2 @@
+# Load docker_helper scripts
+source ~/.docker_helper/docker_helper.sh
