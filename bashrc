@@ -86,3 +86,8 @@ export CPPFLAGS=-Qunused-arguments
 
 # Local additions or overrides
 source ~/.extra_rc 2> /dev/null
+
+# Load NVM
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
