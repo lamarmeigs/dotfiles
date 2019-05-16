@@ -37,7 +37,7 @@ set pastetoggle=<F2>
 
 " Add colored columns to guide coding standards (python only)
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
-set colorcolumn=80,120
+set colorcolumn=80,100,120
 
 " When opening a file, return the cursor to its last known position
 au BufWinEnter * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
