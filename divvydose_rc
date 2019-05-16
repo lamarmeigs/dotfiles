@@ -1,2 +1,15 @@
+# Custom aliases
+alias unittest='python -m unittest'
+alias unittest_coverage='coverage run --branch --source . --omit=tests/* -m unittest discover'
+alias report='coverage report -m'
+
 # Load docker_helper scripts
 source ~/.docker_helper/docker_helper.sh
+
+# Assume AWS Role
+assume() {
+    eval $(assume-role become $1)
+}
+unassume() {
+    eval $(assume-role unset)
+}
