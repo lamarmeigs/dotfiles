@@ -25,13 +25,22 @@ alias please='sudo $(history -p \!\!)'
 alias rmpyc='find . -name "*.pyc" -delete && find . -name "__pycache__" -type d -delete'
 alias rmswp='\rm $(findfile ".*.swp")'
 alias rm="trash-put"
-alias rmedir='find . -empty -type d -delete'
 alias findfile="find . -name"
 alias docker-stop-all='docker stop $(docker ps -aq)'
 alias docker-rm-all='docker rm $(docker ps -aq)'
 
 # custom functions
+remove_empty_directories() {
+    # Remove all empty directories at the specified paths
+    for dir in "$@"
+    do
+        find $dir -empty -type d -delete
+    done
+}
+alias rmedir=remove_empty_directories
+
 make_python_dir() {
+    # recursively create directories with a placeholder __init__.py file
     for dir in "$@"
     do
         mkdir -p $dir
