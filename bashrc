@@ -30,6 +30,11 @@ alias docker-stop-all='docker stop $(docker ps -aq)'
 alias docker-rm-all='docker rm $(docker ps -aq)'
 
 # custom functions
+edit_files_with_pattern() {
+    vim $(grep $@ -rl --exclude *.pyc)
+}
+alias vgrep=edit_files_with_pattern
+
 remove_empty_directories() {
     # Remove all empty directories at the specified paths
     for dir in "$@"
@@ -105,9 +110,13 @@ export NVM_DIR="$HOME/.nvm"
 # Load Poetry
 export PATH="$HOME/.poetry/bin:$PATH"
 
+
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
 [ -f /Users/lamar/.nvm/versions/node/v8.11.4/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /Users/lamar/.nvm/versions/node/v8.11.4/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
 # tabtab source for sls package
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [ -f /Users/lamar/.nvm/versions/node/v8.11.4/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /Users/lamar/.nvm/versions/node/v8.11.4/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
+
+# Load Yarn
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
