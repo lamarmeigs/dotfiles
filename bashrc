@@ -28,6 +28,7 @@ alias rm="trash-put"
 alias findfile="find . -name"
 alias docker-stop-all='docker stop $(docker ps -aq)'
 alias docker-rm-all='docker rm $(docker ps -aq)'
+alias tf='terraform'
 
 # custom functions
 edit_files_with_pattern() {
@@ -93,6 +94,30 @@ gourcerer() {
     \rm -rf /tmp/gourcerer
 }
 
+stitch() {
+    # Combine all mp4 files into a single video (requires ffmpeg)
+    #
+    # Usage:
+    # $> stitch
+    #
+    # TODO: parameters?
+
+    pushd ~/screensavers >/dev/null
+    IFS=$'\n' videos=($(ls -S *.mp4))
+    for((i=0; i < ${#videos[@]}; i+=4))
+    do
+        IFS= batch=( "${videos[@]:i:4}" )
+        while ((${#batch[@]} < 4))
+        do
+            [ ! -f black.png ] && ffmpeg -f lavfi -i color=c=black:s=2880x1800 -vframes 1 black.png &>/dev/null
+            batch+=('black.png')
+        done
+        ffmpeg -i ${batch[0]} -i ${batch[1]} -i ${batch[2]} -i ${batch[3]} -lavfi "[0:v][1:v]hstack[top];[2:v][3:v]hstack[bottom];[top][bottom]vstack" screensaver_$((i/4)).mp4
+    done
+    \rm black.png 2>/dev/null
+    popd >/dev/null
+}
+
 
 
 # for pip install errors on osx
@@ -120,3 +145,7 @@ export PATH="$HOME/.poetry/bin:$PATH"
 
 # Load Yarn
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[ -f /Users/lamar/projects/service-sage/node_modules/tabtab/.completions/slss.bash ] && . /Users/lamar/projects/service-sage/node_modules/tabtab/.completions/slss.bash
