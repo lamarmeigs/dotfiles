@@ -1,0 +1,59 @@
+#!/usr/bin/env bash
+
+gourcerer() {
+    # Generate videos visualizing git commit history (requires gource & ffmpeg)
+    #
+    # Usage:
+    # $> gourcerer /path/to/config
+    #
+    # Config format
+    # /path/to/repo screen-resolution seconds-per-day frame-rate hidden_fields
+    # ~/projects/test_repo 1280x720 1 60 bloom
+
+    mkdir -p ~/screensavers /tmp/gourcerer
+    while IFS=$' ' read -r repo_path resolution secs_per_day frame_rate hidden; do
+
+        # Check out the latest version of the main branch
+        pushd $repo_path >/dev/null
+        repo_name=`basename $(git rev-parse --show-toplevel)`
+        git_source=`git remote get-url origin`
+        git clone $git_source /tmp/gourcerer/$repo_name
+
+        # Generate git history video
+        pushd /tmp/gourcerer/$repo_name >/dev/null
+        gource -$resolution -s $secs_per_day --file-idle-time 0 --key --title $repo_name --hide mouse,$hidden -r $frame_rate -o $repo_name.ppm &&
+            ffmpeg -y -r $frame_rate -f image2pipe -vcodec ppm -i $repo_name.ppm -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -bf 0 ~/screensavers/$repo_name.mp4 </dev/null
+
+        # Clean up
+        \rm -f $repo_name.ppm
+        popd >/dev/null
+        \rm -rf /tmp/gourcerer/$repo_name
+        popd >/dev/null
+    done < $1
+    \rm -rf /tmp/gourcerer
+}
+
+stitch() {
+    # Combine all mp4 files into a single video (requires ffmpeg)
+    #
+    # Usage:
+    # $> stitch
+    #
+    # TODO: parameters?
+
+    pushd ~/screensavers >/dev/null
+    IFS=$'\n' videos=($(ls -S *.mp4))
+    for((i=0; i < ${#videos[@]}; i+=4))
+    do
+        IFS= batch=( "${videos[@]:i:4}" )
+        while ((${#batch[@]} < 4))
+        do
+            [ ! -f black.png ] && ffmpeg -f lavfi -i color=c=black:s=2880x1800 -vframes 1 black.png &>/dev/null
+            batch+=('black.png')
+        done
+        ffmpeg -i ${batch[0]} -i ${batch[1]} -i ${batch[2]} -i ${batch[3]} -lavfi "[0:v][1:v]hstack[top];[2:v][3:v]hstack[bottom];[top][bottom]vstack" screensaver_$((i/4)).mp4
+    done
+    \rm black.png 2>/dev/null
+    popd >/dev/null
+}
+

@@ -26,6 +26,7 @@
     ~/.npmrc: npmrc
     ~/.shiftgig_rc: shiftgig_rc
     ~/.divvydose_rc: divvydose_rc
+    ~/.gourcery_rc: gourcery_rc
     ~/.vim: vim
     ~/.vimrc: vimrc
     ~/.docker_helper: docker_helper
