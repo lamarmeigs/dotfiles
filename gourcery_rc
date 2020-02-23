@@ -1,5 +1,46 @@
 #!/usr/bin/env bash
 
+arch_gourcerer() {
+    # Generate a single video to visualize the git commit history of all given repositories
+    # Requires gource & ffmpeg
+    #
+    # Usage:
+    # $ arch_gourcerer title /path/to/repo1 [/path/to/repoN]
+
+    title=$1
+    mkdir -p ~/screensavers /tmp/gourcery/$title
+    for repo_path in "${@:2}"
+    do
+        # Check out the latest version of the main branch
+        pushd $repo_path >/dev/null
+        repo_name=`basename $(git rev-parse --show-toplevel)`
+        git_source=`git remote get-url origin`
+        echo "Cloning $repo_name..."
+        git clone $git_source /tmp/gourcery/$title/$repo_name >/dev/null 2>&1
+
+        # Generate a log of the repository's git history
+        echo "Generating $repo_name git history..."
+        gource --output-custom-log /tmp/gourcery/$title/$repo_name.txt /tmp/gourcery/$title/$repo_name
+        sed -i '' "s/\(.*\)|/\1|\/$repo_name/" /tmp/gourcery/$title/$repo_name.txt
+
+        # Clean up
+        \rm -rf /tmp/gourcery/$title/$repo_name
+        popd >/dev/null
+    done
+
+    # Generate video of collective git history
+    echo "Running gource..."
+    cat /tmp/gourcery/$title/*.txt | sort -n > /tmp/gourcery/$title.txt
+    gource /tmp/gourcery/$title.txt -2880x1800 -s 0.5 --file-idle-time 0 --key --title $title --hide mouse,filenames -r 30 -o /tmp/gourcery/$title.ppm &&
+        echo "Encoding video..."
+        ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i /tmp/gourcery/$title.ppm -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -bf 0 ~/screensavers/$title.mp4 </dev/null
+
+    # Clean up
+    \rm -rf /tmp/gourcery/$title.ppm /tmp/gourcery/$title.txt
+    [ -z "$(ls -A /tmp/gourcery)" ] && \rm -rf /tmp/gourcery
+    echo "Done!"
+}
+
 gourcerer() {
     # Generate videos visualizing git commit history (requires gource & ffmpeg)
     #
