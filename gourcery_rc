@@ -28,15 +28,26 @@ arch_gourcerer() {
         popd >/dev/null
     done
 
+    # Generate collective git history
+    #   Include initial creation/deletion of dummy root file to establish the hidden root directory
+    #   Include any extra logs from ~/screensavers (to represent untracked archival or discarding)
+    echo "Generating collective git history..."
+    cat /tmp/gourcery/$title/*.txt | sort -n > /tmp/gourcery/"$title"_base.txt
+    IFS='|' eval 'first_commit=( `head -n 1 /tmp/gourcery/"$title"_base.txt` )'
+    new_timestamp=$((${first_commit[0]}-1))
+    echo -e "$new_timestamp|${first_commit[1]}|A|." >> /tmp/gourcery/"$title"_extra.txt
+    echo -e "$new_timestamp|${first_commit[1]}|D|." >> /tmp/gourcery/"$title"_extra.txt
+    cat ~/screensavers/"$title"_extra.log >> /tmp/gourcery/"$title"_extra.txt 2>/dev/null
+    cat /tmp/gourcery/"$title"_base.txt /tmp/gourcery/"$title"_extra.txt | sort -n > /tmp/gourcery/$title.txt
+
     # Generate video of collective git history
     echo "Running gource..."
-    cat /tmp/gourcery/$title/*.txt | sort -n > /tmp/gourcery/$title.txt
     gource /tmp/gourcery/$title.txt -2880x1800 -s 0.5 --file-idle-time 0 --key --title $title --hide mouse,filenames --hide-root -r 30 -o /tmp/gourcery/$title.ppm &&
         echo "Encoding video..."
         ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i /tmp/gourcery/$title.ppm -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -bf 0 ~/screensavers/$title.mp4 </dev/null
 
     # Clean up
-    \rm -rf /tmp/gourcery/$title.ppm /tmp/gourcery/$title.txt
+    \rm -rf /tmp/gourcery/"$title"*
     [ -z "$(ls -A /tmp/gourcery)" ] && \rm -rf /tmp/gourcery
     echo "Done!"
 }
