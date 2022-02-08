@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Obtain CodeArtifact auth token
 
 # Source any system-provided profile
 [ -r ~/.profile ] && source ~/.profile

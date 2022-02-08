@@ -41,7 +41,9 @@ arch_gourcerer() {
 
     # Generate video of collective git history
     echo "Running gource..."
-    gource /tmp/gourcery/$title.log -2880x1800 -s 0.5 --file-idle-time 0 --key --title $title --hide mouse,filenames --hide-root -r 30 -o /tmp/gourcery/$title.ppm &&
+    # gource /tmp/gourcery/$title.log -2880x1800 -s 0.5 --file-idle-time 0 --key --title $title --hide mouse,filenames --hide-root -r 30 -o /tmp/gourcery/$title.ppm &&
+    #     ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i /tmp/gourcery/$title.ppm -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -bf 0 ~/screensavers/$title.mp4 </dev/null
+    gource /tmp/gourcery/$title.log -1440x900 -s 0.5 --file-idle-time 0 --key --title $title --hide mouse,filenames --hide-root -r 30 -o /tmp/gourcery/$title.ppm &&
         ffmpeg -y -r 30 -f image2pipe -vcodec ppm -i /tmp/gourcery/$title.ppm -vcodec libx264 -preset ultrafast -pix_fmt yuv420p -crf 1 -bf 0 ~/screensavers/$title.mp4 </dev/null
 
     # Clean up

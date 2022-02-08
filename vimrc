@@ -3,7 +3,9 @@ execute pathogen#infect()
 execute pathogen#helptags()
 
 " Configure syntastic linters
-let g:syntastic_python_checkers = ['flake8', 'pydocstyle', 'py3kwarn', 'python']
+let g:syntastic_python_checkers = ['flake8', 'pydocstyle', 'py3kwarn']
+let g:syntastic_python_flake8_args = "--max-line-length 99"
+let g:syntastic_bash_checkers = ['shellcheck']
 let g:syntastic_check_on_open = 1
 let g:syntastic_always_populate_loc_list = 1
 

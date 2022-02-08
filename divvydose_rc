@@ -2,21 +2,45 @@
 alias unittest='python -m unittest'
 alias unittest_coverage='coverage run --branch --source . --omit=tests/* -m unittest discover'
 alias report='coverage report -m'
+alias sso-sls-deploy='aws-export-credentials --profile $AWS_PROFILE --exec npm run sls-deploy'
+alias sso-sls-remove='aws-export-credentials --profile $AWS_PROFILE --exec npm run sls-remove'
 
 # Load docker_helper scripts
 source ~/.docker_helper/docker_helper.sh
 
 # Assume AWS Role
-assume() {
-    eval $(assume-role unset)
-    eval $(assume-role become $1)
-}
+# assume() {
+#     eval $(assume-role unset)
+#     eval $(assume-role become $1)
+# }
 unassume() {
     eval $(assume-role unset)
 }
 long-assume() {
-    role=$(aws sts assume-role --role-arn $1  --role-session-name local-dev --duration-seconds 3600)
+    role=$(aws sts assume-role --role-arn $1  --role-session-name `id -un`-local-dev --duration-seconds 3600)
     export AWS_ACCESS_KEY_ID=$(echo $role | jq -j ".Credentials.AccessKeyId")
     export AWS_SECRET_ACCESS_KEY=$(echo $role | jq -j ".Credentials.SecretAccessKey")
     export AWS_SESSION_TOKEN=$(echo $role | jq -j ".Credentials.SessionToken")
 }
+
+# AWS SSO Login
+aws_login() {
+    export AWS_PROFILE=$1
+    aws sts get-caller-identity >/dev/null 2>&1 || aws sso login --profile $1
+    aws-export-credentials --profile $AWS_PROFILE --credentials-file-profile $AWS_PROFILE
+}
+alias assume=aws_login
+aws_logout() {
+    aws sso logout
+    unset AWS_PROFILE
+}
+alias assume=aws_logout
+
+# Add all bastion identities
+ssh-add -K ~/.ssh/passphrase_key/id_rsa
+
+# Obtain CodeArtifact auth token
+ca_login() {
+    export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain $1 --domain-owner 120043296445 --query authorizationToken --output text`
+}
+ca_login divvydose

@@ -4,12 +4,15 @@
 source ~/.local/bin/virtualenvwrapper.sh
 
 # Load pyenv, if necessary
-if which pyenv > /dev/null; then eval "$(pyenv init -)"; fi
+if which pyenv > /dev/null; then
+    eval "$(pyenv init -)"
+    eval "$(pyenv init --path)"
+fi
 
 # Context-specific commands
-source ~/.bash_it_rc
 source ~/.shiftgig_rc 2>/dev/null
 source ~/.divvydose_rc 2>/dev/null
+source ~/.bash_it_rc
 
 # Configure bash history
 # - make it really big
@@ -24,7 +27,7 @@ alias ...="cd ../.."
 alias please='sudo $(history -p \!\!)'
 alias rmpyc='find . -name "*.pyc" -delete && find . -name "__pycache__" -type d -delete'
 alias rmswp='\rm $(findfile ".*.swp")'
-alias rm="trash-put"
+# alias rm="trash-put"
 alias findfile="find . -name"
 alias docker-stop-all='docker stop $(docker ps -aq)'
 alias docker-rm-all='docker rm $(docker ps -aq)'
@@ -64,7 +67,8 @@ alias mkpydir=make_python_dir
 
 # for pip install errors on osx
 export CFLAGS=-Qunused-arguments
-export CPPFLAGS=-Qunused-arguments
+export LDFLAGS="-L/usr/local/opt/zlib/lib -L/usr/local/opt/bzip2/lib -L/usr/local/opt/libffi/lib"
+export CPPFLAGS="-Qunused-arguments -I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
 
 # Local additions or overrides
 source ~/.gourcery_rc 2> /dev/null
@@ -78,6 +82,14 @@ export NVM_DIR="$HOME/.nvm"
 # Load Poetry
 export PATH="$HOME/.poetry/bin:$PATH"
 
+# Silence Apple's zsh warning
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+# Load AWS config
+export AWS_SDK_LOAD_CONFIG=true
+
+# Mitigate Log4Shell
+export JAVA_TOOL_OPTIONS='-Dlog4j.formatMsgNoLookups=true'
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
