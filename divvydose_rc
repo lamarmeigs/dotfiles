@@ -26,15 +26,17 @@ long-assume() {
 # AWS SSO Login
 aws_login() {
     export AWS_PROFILE=$1
-    aws sts get-caller-identity >/dev/null 2>&1 || aws sso login --profile $1
-    aws-export-credentials --profile $AWS_PROFILE --credentials-file-profile $AWS_PROFILE
+    aws sts get-caller-identity >/dev/null 2>&1 || aws sso login
 }
 alias assume=aws_login
 aws_logout() {
     aws sso logout
     unset AWS_PROFILE
 }
-alias assume=aws_logout
+aws_export() {
+    aws-export-credentials --profile $AWS_PROFILE --credentials-file-profile ${AWS_PROFILE}-session \
+      && export AWS_PROFILE=${AWS_PROFILE}-session
+}
 
 # Add all bastion identities
 ssh-add -K ~/.ssh/passphrase_key/id_rsa

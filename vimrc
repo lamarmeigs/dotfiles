@@ -13,6 +13,11 @@ let g:syntastic_always_populate_loc_list = 1
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_no_default_key_mappings=1
 
+" Configure vim-terraform
+let g:terraform_fmt_on_save=1
+let g:terraform_align=1
+let g:hcl_align=1
+
 " Enable syntax highlighting
 syntax on
 
