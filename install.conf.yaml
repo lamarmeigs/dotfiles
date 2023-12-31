@@ -1,32 +1,28 @@
 - clean: ['~']
 
-
-# Setup bash-it first, since it wants to backup bash_profile
-- link:
-    ~/.bash_it: bash-it
-    ~/.bash_it_rc: bash_it_rc
-
-- shell:
-    - [~/.bash_it/install.sh, Installing bash-it...]
-    - [bash-it enable completion bash-it brew django git pip vagrant, Enabling bash-it completions...]
-    - [bash-it enable alias fuck general vim, Enabling bash-it aliases...]
-    - [bash-it enable plugin alias-completion, Enabling bash-it plugins...]
-    - [rm ~/.bash_profile, Removing bash-it generated .bash_profile...]
+- create:
+    - ~/misc
+    - ~/projects
+    - ~/screensavers
 
 - link:
-    ~/.bash_it/themes/mini: bash-it-themes/mini
-
-
-# Setup everything else
-- link:
-    ~/.bashrc: bashrc
-    ~/.bash_profile: bash_profile
     ~/.gitconfig: gitconfig
     ~/.gitignore_global: gitignore_global
     ~/.npmrc: npmrc
-    ~/.shiftgig_rc: shiftgig_rc
-    ~/.divvydose_rc: divvydose_rc
-    ~/.gourcery_rc: gourcery_rc
+    ~/.oh-my-zsh/custom/themes/simple.zsh-theme: oh-my-zsh/custom/themes/simple.zsh-theme
     ~/.vim: vim
     ~/.vimrc: vimrc
-    ~/.docker_helper: docker_helper
+    ~/.zshrc: zshrc
+    ~/.zprofile: zprofile
+    ~/screensavers/gourcery.sh: gourcery.sh
+
+- shell:
+    -
+      - 'omz theme set simple'
+      - 'Configuring omz theme...'
+    -
+      - 'omz plugin enable git terraform'
+      - 'Enabling omz plugins...'
+    -
+      - 'brew install awscli pre-commit pyenv pyenv-virtualenvwrapper tfenv tfmigrate tfsec'
+      - 'Installing additional tools...'
