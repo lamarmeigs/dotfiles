@@ -14,7 +14,7 @@
     ~/.vimrc: vimrc
     ~/.zshrc: zshrc
     ~/.zprofile: zprofile
-    ~/screensavers/gourcery.sh: gourcery.sh
+    ~/screensavers/gourcery.sh: screensavers/gourcery.sh
 
 - shell:
     -
