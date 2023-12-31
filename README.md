@@ -1,19 +1,26 @@
 # dotfiles
 
-This repository contains a collection of dot files that I use to configure my local work environment. The whole thing
-is a continuous work-in-progress, and not intended to be shared.
+Workstation configuration, powered by [DotBot](https://github.com/anishathalye/dotbot).
 
-## Installation
+
+## Setup
 
 On a completely new system, the following should be installed manually:
 
-* [Homebrew](http://brew.sh/)
-* Python and Pip
-* [VirtualEnv Wrapper](https://virtualenvwrapper.readthedocs.io/en/latest/install.html#basic-installation)
-* [Trash-CLI](https://github.com/andreafrancia/trash-cli)
+  * [Homebrew](http://brew.sh/)
 
-Thereafter, the rest of the installation is automated by Anish Athalye's [DotBot](https://github.com/anishathalye/dotbot).
+    ```shell
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    ```
 
-```bash
-    $> ./install.sh
+  * [Oh My ZSH](https://ohmyz.sh/)
+
+    ```shell
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    ```
+
+Thereafter, simply run the idempotent install script:
+
+```shell
+./install.sh
 ```
