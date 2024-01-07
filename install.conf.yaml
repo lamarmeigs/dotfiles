@@ -1,28 +1,41 @@
 - clean: ['~']
 
 - create:
-    - ~/misc
-    - ~/projects
-    - ~/screensavers
+    ~/misc:
+      mode: 755
+    ~/projects:
+      mode: 755
+    ~/screensavers:
+      mode: 755
 
 - link:
-    ~/.gitconfig: gitconfig
+    ~/.gitconfig:
+      force: true
+      path: gitconfig
     ~/.gitignore_global: gitignore_global
     ~/.npmrc: npmrc
     ~/.oh-my-zsh/custom/themes/simple.zsh-theme: oh-my-zsh/custom/themes/simple.zsh-theme
     ~/.vim: vim
     ~/.vimrc: vimrc
-    ~/.zshrc: zshrc
+    ~/.zshrc:
+        force: true
+        path: zshrc
     ~/.zprofile: zprofile
     ~/screensavers/gourcery.sh: screensavers/gourcery.sh
 
 - shell:
     -
-      - 'omz theme set simple'
-      - 'Configuring omz theme...'
+      command: 'source $HOME/.zshrc && omz theme set simple'
+      description: 'Configuring omz theme...'
+      stdout: true
+      stderr: true
     -
-      - 'omz plugin enable git terraform'
-      - 'Enabling omz plugins...'
+      command: 'source $HOME/.zshrc && omz plugin enable git terraform'
+      description: 'Enabling omz plugins...'
+      stdout: true
+      stderr: true
     -
-      - 'brew install awscli pre-commit pyenv pyenv-virtualenvwrapper tfenv tfmigrate tfsec'
-      - 'Installing additional tools...'
+      command: 'brew install awscli pre-commit pyenv-virtualenvwrapper tfenv tfmigrate tfsec'
+      description: 'Installing additional tools...'
+      stdout: true
+      stderr: true

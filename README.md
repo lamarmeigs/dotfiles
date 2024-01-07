@@ -19,6 +19,14 @@ On a completely new system, the following should be installed manually:
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
     ```
 
+  * Python
+
+    ```shell
+    brew install pyenv
+    pyenv install 3.12  # or latest
+    pyenv global use 3.12
+    ```
+
 Thereafter, simply run the idempotent install script:
 
 ```shell
