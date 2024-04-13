@@ -4,6 +4,8 @@ execute pathogen#helptags()
 
 " Configure ALE linter
 let g:ale_virtualtext_cursor = 'disabled'
+let g:ale_linters_ignore = {'terraform': ['tfsec']}
+nnoremap <silent> <C-a> <Cmd>ALEDetail<CR>
 
 " Configure vim-markdown
 let g:vim_markdown_folding_disabled=1

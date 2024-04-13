@@ -2,4 +2,8 @@
 	name = Lamar
 	email = lamar@growtherapy.com
 [core]
-	excludesfile = /Users/lamar/.gitignore_global
+	excludesfile = /Users/lamarmeigs/.gitignore_global
+[pull]
+	rebase = false
+[alias]
+    fix = "!vim $(git diff --name-only --diff-filter=U --relative | uniq)"
