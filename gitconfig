@@ -7,3 +7,5 @@
 	rebase = false
 [alias]
     fix = "!vim $(git diff --name-only --diff-filter=U --relative | uniq)"
+    adog = "log --all --decorate --oneline --graph"
+    new = "switch -c"

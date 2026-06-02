@@ -70,7 +70,7 @@ ZSH_THEME="simple" # set by `omz`
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git terraform)
+plugins=(git terraform docker poetry direnv kubectl)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -99,3 +99,6 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /opt/homebrew/bin/terragrunt terragrunt

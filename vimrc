@@ -4,7 +4,7 @@ execute pathogen#helptags()
 
 " Configure ALE linter
 let g:ale_virtualtext_cursor = 'disabled'
-let g:ale_linters_ignore = {'terraform': ['tfsec'], 'python': ['pylint']}
+let g:ale_linters_ignore = {'terraform': ['tfsec'], 'python': ['pylint','flake8']}
 nnoremap <silent> <C-a> <Cmd>ALEDetail<CR>
 
 " Configure vim-markdown
@@ -38,11 +38,13 @@ set viminfo='20,<100,s10
 set ruler
 
 " Press F2 to switch between paste and nopaste (bypasses autoindent)
-set pastetoggle=<F2>
+if exists(':pastetoggle')
+  set pastetoggle=<F2>
+endif
 
 " Add colored columns to guide coding standards (python only)
 highlight ColorColumn ctermbg=235 guibg=#2c2d27
-set colorcolumn=80,100,120
+set colorcolumn=80,88,100,120
 
 " When opening a file, return the cursor to its last known position
 au BufWinEnter * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
@@ -50,3 +52,17 @@ au BufWinEnter * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " Activate filetype-specific plugins
 filetype plugin on
 filetype plugin indent on
+
+" Use vim-plug for managing plugins
+call plug#begin()
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+call plug#end()
+
+" Define the language server command for yaml files
+let g:lsp_server_commands = {
+    \ 'yaml': {
+        \ 'command': ['yaml-language-server', '--stdio'],
+        \ 'filetypes': ['yaml'],
+        \ },
+    \ }
