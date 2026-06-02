@@ -35,7 +35,7 @@
       stdout: true
       stderr: true
     -
-      command: 'brew install awscli pre-commit pyenv-virtualenvwrapper tfenv tfmigrate tfsec'
+      command: 'brew install awscli pre-commit pyenv-virtualenvwrapper tfenv tfmigrate tfsec direnv'
       description: 'Installing additional tools...'
       stdout: true
       stderr: true

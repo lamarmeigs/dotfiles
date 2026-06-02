@@ -33,7 +33,8 @@ pyenv virtualenvwrapper
 export LESS="-F -X -R"
 
 # Build docker containers for the platform on which they'll run
-export DOCKER_DEFAULT_PLATFORM=linux/amd64
+# (previously needed for python-service-chassis?)
+# export DOCKER_DEFAULT_PLATFORM=linux/amd64
 
 # Remove all empty directories from the current path
 remove_empty_directories() {
@@ -64,3 +65,14 @@ if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/
 
 # The next line enables shell command completion for gcloud.
 if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
+
+# Add poetry to PATH
+export PATH="$HOME/.local/bin:$PATH"
+
+# Add tgswitch bin to PATH
+export PATH="$PATH:$HOME/bin"
+
+# Allow `tenv tf use` to install versions of Terraform
+export TENV_AUTO_INSTALL=true
+
+source ~/.extra_rc
