@@ -9,6 +9,9 @@
       mode: 755
 
 - link:
+    ~/.config/nvim:
+      create: true
+      path: nvim
     ~/.gitconfig:
       force: true
       path: gitconfig

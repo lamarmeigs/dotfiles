@@ -27,6 +27,12 @@ On a completely new system, the following should be installed manually:
     pyenv global use 3.12
     ```
 
+  * Neovim
+
+    ```shell
+    brew install neovim
+    ```
+
 Thereafter, simply run the idempotent install script:
 
 ```shell
