@@ -72,6 +72,9 @@ export PATH="$HOME/.local/bin:$PATH"
 # Add tgswitch bin to PATH
 export PATH="$PATH:$HOME/bin"
 
+# Add local bin to path
+export PATH="$HOME/.local/bin:$PATH"
+
 # Allow `tenv tf use` to install versions of Terraform
 export TENV_AUTO_INSTALL=true
 
