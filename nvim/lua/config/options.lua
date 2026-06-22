@@ -7,3 +7,6 @@ vim.g.maplocalleader = "\\"
 
 vim.opt.relativenumber = false
 vim.opt.wrap = true
+
+-- Add colored columns to guide coding standards
+vim.opt.colorcolumn = "80,88,100,120"
