@@ -17,6 +17,9 @@
       path: gitconfig
     ~/.gitignore_global: gitignore_global
     ~/.npmrc: npmrc
+    ~/.config/ghostty/config:
+      create: true
+      path: ghostty_config
     ~/.oh-my-zsh/custom/themes/simple.zsh-theme: oh-my-zsh/custom/themes/simple.zsh-theme
     ~/.vim: vim
     ~/.vimrc: vimrc
